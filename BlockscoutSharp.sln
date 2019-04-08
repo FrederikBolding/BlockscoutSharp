@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockscoutSharp", "BlockscoutSharp\BlockscoutSharp.csproj", "{C504E48F-9110-427F-8F77-449A7270A0B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockscoutSharpTests", "..\BlockscoutSharpTests\BlockscoutSharpTests.csproj", "{7608DCC9-AA34-4B78-A2EF-DFFDFCD53C6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C504E48F-9110-427F-8F77-449A7270A0B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C504E48F-9110-427F-8F77-449A7270A0B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C504E48F-9110-427F-8F77-449A7270A0B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C504E48F-9110-427F-8F77-449A7270A0B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7608DCC9-AA34-4B78-A2EF-DFFDFCD53C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7608DCC9-AA34-4B78-A2EF-DFFDFCD53C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7608DCC9-AA34-4B78-A2EF-DFFDFCD53C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7608DCC9-AA34-4B78-A2EF-DFFDFCD53C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17DBC33B-75CD-4BA8-8C2F-FFBBB7057F9E}
+	EndGlobalSection
+EndGlobal
