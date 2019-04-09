@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>BlockscoutSharp</RootNamespace>
+    <Authors>Frederik Bolding</Authors>
+    <Version>0.1</Version>
+    <PackageProjectUrl>https://github.com/FrederikBolding/BlockscoutSharp</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

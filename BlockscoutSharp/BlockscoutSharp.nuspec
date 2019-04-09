@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Frederik Bolding</authors>
+    <owners>Frederik Bolding</owners>
+    <projectUrl>https://github.com/FrederikBolding/BlockscoutSharp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An API wrapper for blockscout.com</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>blockscout eth api blockchain explorer</tags>
+  </metadata>
+</package>
