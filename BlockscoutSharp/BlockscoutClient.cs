@@ -15,7 +15,7 @@ namespace BlockscoutSharp
 
         private async Task<T> Request<T>(API api, string module, string action, string query)
         {
-            var split = api.ToString().Split("_");
+            var split = api.ToString().Split('_');
             var currency = split[0].ToLower();
             var net = split[1].ToLower();
             using (var client = new HttpClient())
