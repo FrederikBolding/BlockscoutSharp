@@ -62,10 +62,28 @@ namespace BlockscoutSharp
             return transactions;
         }
 
+        public async Task<BaseRequest<List<TokenTransfer>>> GetTokenTransactions(API api, string contractAddress, string address)
+        {
+            var balance = await Request<BaseRequest<List<TokenTransfer>>>(api, "account", "tokentx", $"contractaddress={contractAddress}&address={address}").ConfigureAwait(false);
+            return balance;
+        }
+
         public async Task<BaseRequest<long>> GetTokenBalance(API api, string contractAddress, string address)
         {
-            var balance = await Request<BaseRequest<long>>(api, "account", "balance", $"contractaddress={contractAddress}&address={address}").ConfigureAwait(false);
+            var balance = await Request<BaseRequest<long>>(api, "account", "tokenbalance", $"contractaddress={contractAddress}&address={address}").ConfigureAwait(false);
             return balance;
+        }
+
+        public async Task<BaseRequest<List<Token>>> GetTokenList(API api, string address)
+        {
+            var tokens = await Request<BaseRequest<List<Token>>>(api, "account", "tokenlist", $"address={address}").ConfigureAwait(false);
+            return tokens;
+        }
+
+        public async Task<BaseRequest<List<Block>>> GetMinedBlocks(API api, string address)
+        {
+            var blocks = await Request<BaseRequest<List<Block>>>(api, "account", "getminedblocks", $"address={address}").ConfigureAwait(false);
+            return blocks;
         }
     }
 
