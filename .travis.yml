@@ -6,3 +6,10 @@ solution: BlockscoutSharp.sln
 script:
   - dotnet restore
   - dotnet test
+  - dotnet pack -c Release
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: dotnet nuget push ./BlockscoutSharp/bin/Release/BlockscoutSharp.*.nupkg -k $NUGET_API_KEY -s $NUGET_SOURCE
+  on:
+    branch: release
