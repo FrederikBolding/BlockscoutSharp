@@ -12,32 +12,32 @@ namespace BlockscoutSharp.Objects
         public string BlockHash { get; set; }
 
         [JsonProperty("blockNumber")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long BlockNumber { get; set; }
 
         [JsonProperty("confirmations")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Confirmations { get; set; }
 
         [JsonProperty("contractAddress")]
         public string ContractAddress { get; set; }
 
         [JsonProperty("cumulativeGasUsed")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long CumulativeGasUsed { get; set; }
 
         [JsonProperty("from")]
         public string From { get; set; }
 
         [JsonProperty("gas")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Gas { get; set; }
 
         [JsonProperty("gasPrice")]
         public string GasPrice { get; set; }
 
         [JsonProperty("gasUsed")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long GasUsed { get; set; }
 
         [JsonProperty("hash")]
@@ -47,18 +47,18 @@ namespace BlockscoutSharp.Objects
         public string Input { get; set; }
 
         [JsonProperty("nonce")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Nonce { get; set; }
 
         [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long TimeStamp { get; set; }
 
         [JsonProperty("to")]
         public string To { get; set; }
 
         [JsonProperty("tokenDecimal")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long TokenDecimal { get; set; }
 
         [JsonProperty("tokenName")]
@@ -68,7 +68,7 @@ namespace BlockscoutSharp.Objects
         public string TokenSymbol { get; set; }
 
         [JsonProperty("transactionIndex")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long TransactionIndex { get; set; }
 
         [JsonProperty("value")]

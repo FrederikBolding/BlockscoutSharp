@@ -9,14 +9,14 @@ namespace BlockscoutSharp.Objects
     public class Token
     {
         [JsonProperty("balance")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Balance { get; set; }
 
         [JsonProperty("contractAddress")]
         public string ContractAddress { get; set; }
 
         [JsonProperty("decimals")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Decimals { get; set; }
 
         [JsonProperty("name")]

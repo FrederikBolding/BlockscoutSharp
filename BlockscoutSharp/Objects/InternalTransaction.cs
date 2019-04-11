@@ -9,7 +9,7 @@ namespace BlockscoutSharp.Objects
     public class InternalTransaction
     {
         [JsonProperty("blockNumber")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long BlockNumber { get; set; }
 
         [JsonProperty("contractAddress")]
@@ -22,22 +22,22 @@ namespace BlockscoutSharp.Objects
         public string From { get; set; }
 
         [JsonProperty("gas")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long Gas { get; set; }
 
         [JsonProperty("gasUsed")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long GasUsed { get; set; }
 
         [JsonProperty("input")]
         public string Input { get; set; }
 
         [JsonProperty("isError")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long IsError { get; set; }
 
         [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long TimeStamp { get; set; }
 
         [JsonProperty("to")]

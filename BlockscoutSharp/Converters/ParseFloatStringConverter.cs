@@ -1,22 +1,23 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Globalization;
 
 namespace BlockscoutSharp.Converters
 {
-    public class ParseStringConverter : JsonConverter
+    public class ParseFloatStringConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
+        public override bool CanConvert(Type t) => t == typeof(float) || t == typeof(float?);
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            long l;
-            if (Int64.TryParse(value, out l))
+            float f;
+            if (float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out f))
             {
-                return l;
+                return f;
             }
-            throw new Exception("Cannot unmarshal type long");
+            throw new Exception("Cannot unmarshal type float");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -26,11 +27,11 @@ namespace BlockscoutSharp.Converters
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (long)untypedValue;
+            var value = (float)untypedValue;
             serializer.Serialize(writer, value.ToString());
             return;
         }
 
-        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
+        public static readonly ParseFloatStringConverter Singleton = new ParseFloatStringConverter();
     }
 }

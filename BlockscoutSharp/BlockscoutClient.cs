@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using BlockscoutSharp.Objects;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace BlockscoutSharp
 {
@@ -84,6 +85,25 @@ namespace BlockscoutSharp
         {
             var blocks = await Request<BaseRequest<List<Block>>>(api, "account", "getminedblocks", $"address={address}").ConfigureAwait(false);
             return blocks;
+        }
+
+
+        public async Task<BaseRequest<BigInteger>> GetTokenSupply(API api, string contractAddress)
+        {
+            var supply = await Request<BaseRequest<BigInteger>>(api, "stats", "tokensupply", $"contractaddress={contractAddress}").ConfigureAwait(false);
+            return supply;
+        }
+
+        public async Task<BaseRequest<BigInteger>> GetETHSupply(API api)
+        {
+            var supply = await Request<BaseRequest<BigInteger>>(api, "stats", "ethsupply", "").ConfigureAwait(false);
+            return supply;
+        }
+
+        public async Task<BaseRequest<ETHPrice>> GetETHPrice(API api)
+        {
+            var supply = await Request<BaseRequest<ETHPrice>>(api, "stats", "ethprice", "").ConfigureAwait(false);
+            return supply;
         }
     }
 

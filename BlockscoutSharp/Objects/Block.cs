@@ -9,14 +9,14 @@ namespace BlockscoutSharp.Objects
     public class Block
     {
         [JsonProperty("blockNumber")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long BlockNumber { get; set; }
 
         [JsonProperty("blockReward")]
         public string BlockReward { get; set; }
 
         [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseStringConverter))]
+        [JsonConverter(typeof(ParseLongStringConverter))]
         public long TimeStamp { get; set; }
     }
 }
