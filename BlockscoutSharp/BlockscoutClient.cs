@@ -105,6 +105,12 @@ namespace BlockscoutSharp
             var supply = await Request<BaseRequest<ETHPrice>>(api, "stats", "ethprice", "").ConfigureAwait(false);
             return supply;
         }
+
+        public async Task<BaseRequest<TransactionInfo>> GetTransactionInfo(API api, string txhash)
+        {
+            var transaction = await Request<BaseRequest<TransactionInfo>>(api, "transaction", "gettxinfo", $"txhash={txhash}").ConfigureAwait(false);
+            return transaction;
+        }
     }
 
     public enum API
