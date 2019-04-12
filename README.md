@@ -9,4 +9,4 @@ The project is still under development.
 Pull Requests are very welcome.
 
 ## License
-This project is licensed under [MIT License](LICENSE.md)
+This project is licensed under [MIT License](LICENSE)
