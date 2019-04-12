@@ -47,8 +47,8 @@ namespace BlockscoutSharp.Objects
         public string To { get; set; }
 
         [JsonProperty("value")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long Value { get; set; }
+        [JsonConverter(typeof(ParseBalanceStringConverter))]
+        public Balance Value { get; set; }
     }
 
     public class TransactionLogEntry

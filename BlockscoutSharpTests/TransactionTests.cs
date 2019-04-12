@@ -18,6 +18,7 @@ namespace BlockscoutSharpTests
             var transaction = client.GetTransactionInfo(API.ETH_Mainnet, "0xa9a2e495f3f17a823db5ba5cb77986625ea590107e4b3caf2517ab11f449bc33").Result;
             Assert.AreEqual(RequestStatus.OK, transaction.Status);
             Assert.AreEqual(7252792, transaction.Result.BlockNumber);
+            Assert.IsTrue(transaction.Result.Value.eth > 0);
         }
     }
 }

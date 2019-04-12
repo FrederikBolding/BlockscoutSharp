@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BlockscoutSharp.Objects;
 using System.Collections.Generic;
 using System.Numerics;
+using BlockscoutSharp.Converters;
 
 namespace BlockscoutSharp
 {
@@ -14,7 +15,7 @@ namespace BlockscoutSharp
     {
         private string baseUrl = "https://blockscout.com";
 
-        private async Task<T> Request<T>(API api, string module, string action, string query)
+        private async Task<T> Request<T>(API api, string module, string action, string query, JsonConverter converter = null)
         {
             var split = api.ToString().Split('_');
             var currency = split[0].ToLower();
@@ -29,9 +30,15 @@ namespace BlockscoutSharp
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    List<JsonConverter> converters = new List<JsonConverter>();
+                    if(converter != null)
+                    {
+                        converters.Add(converter);
+                    }
                     return (T)JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings()
                     {
-                        Error = HandleDeserializationError
+                        Error = HandleDeserializationError,
+                        Converters = converters
                     });
                 }
                 else
@@ -45,9 +52,9 @@ namespace BlockscoutSharp
             errorArgs.ErrorContext.Handled = true;
         }
 
-        public async Task<BaseRequest<long>> GetBalance(API api, string address)
+        public async Task<BaseRequest<Balance>> GetBalance(API api, string address)
         {
-            var balance = await Request<BaseRequest<long>>(api, "account", "balance", $"address={address}").ConfigureAwait(false);
+            var balance = await Request<BaseRequest<Balance>>(api, "account", "balance", $"address={address}", ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
             return balance;
         }
 

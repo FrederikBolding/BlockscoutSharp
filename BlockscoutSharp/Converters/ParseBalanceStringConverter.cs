@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using BlockscoutSharp.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Numerics;
 
 namespace BlockscoutSharp.Converters
 {
-    public class ParseBigIntegerStringConverter : JsonConverter
+    public class ParseBalanceStringConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(BigInteger) || t == typeof(BigInteger?);
+        public override bool CanConvert(Type t) => t == typeof(Balance);
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
@@ -15,9 +16,9 @@ namespace BlockscoutSharp.Converters
             BigInteger i;
             if (BigInteger.TryParse(value, out i))
             {
-                return i;
+                return new Balance(i);
             }
-            throw new Exception("Cannot unmarshal type BigInteger");
+            throw new Exception("Cannot unmarshal type Balance");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -27,11 +28,11 @@ namespace BlockscoutSharp.Converters
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (BigInteger)untypedValue;
+            var value = (Balance)untypedValue;
             serializer.Serialize(writer, value.ToString());
             return;
         }
 
-        public static readonly ParseBigIntegerStringConverter Singleton = new ParseBigIntegerStringConverter();
+        public static readonly ParseBalanceStringConverter Singleton = new ParseBalanceStringConverter();
     }
 }

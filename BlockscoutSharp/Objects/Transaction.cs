@@ -9,8 +9,8 @@ namespace BlockscoutSharp.Objects
     public class Transaction
     {
         [JsonProperty("value")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long Value { get; set; }
+        [JsonConverter(typeof(ParseBalanceStringConverter))]
+        public Balance Value { get; set; }
 
         [JsonProperty("txreceipt_status")]
         [JsonConverter(typeof(ParseLongStringConverter))]

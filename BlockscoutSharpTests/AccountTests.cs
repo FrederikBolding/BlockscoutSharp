@@ -15,7 +15,7 @@ namespace BlockscoutSharpTests
         {
             var balance = client.GetBalance(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
             Assert.AreEqual(RequestStatus.OK, balance.Status);
-            Assert.IsTrue(balance.Result > 0);
+            Assert.IsTrue(balance.Result.eth > 0);
         }
 
         [TestMethod]
@@ -24,6 +24,7 @@ namespace BlockscoutSharpTests
             var transactions = client.GetTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
+            Assert.IsTrue(transactions.Result.First().Value.eth > 0);
         }
 
         [TestMethod]
@@ -33,6 +34,7 @@ namespace BlockscoutSharpTests
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
             Assert.AreEqual(2300, transactions.Result[1].Gas);
+            Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
         }
 
         [TestMethod]

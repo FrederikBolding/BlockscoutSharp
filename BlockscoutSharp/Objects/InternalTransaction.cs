@@ -47,6 +47,7 @@ namespace BlockscoutSharp.Objects
         public string Type { get; set; }
 
         [JsonProperty("value")]
-        public string Value { get; set; }
+        [JsonConverter(typeof(ParseBalanceStringConverter))]
+        public Balance Value { get; set; }
     }
 }
