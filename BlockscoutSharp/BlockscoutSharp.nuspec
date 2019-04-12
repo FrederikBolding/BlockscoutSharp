@@ -8,9 +8,10 @@
     <owners>Frederik Bolding</owners>
     <projectUrl>https://github.com/FrederikBolding/BlockscoutSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>An API wrapper for blockscout.com</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <description>Wrapper for Blockscout's Web API</description>
+    <releaseNotes>Added more API methods</releaseNotes>
     <copyright>Copyright 2019</copyright>
+    <license type="expression">MIT</license>
     <tags>blockscout eth api blockchain explorer</tags>
   </metadata>
 </package>
