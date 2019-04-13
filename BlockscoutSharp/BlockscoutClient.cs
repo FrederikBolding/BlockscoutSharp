@@ -76,9 +76,9 @@ namespace BlockscoutSharp
             return balance;
         }
 
-        public async Task<BaseRequest<long>> GetTokenBalance(API api, string contractAddress, string address)
+        public async Task<BaseRequest<Balance>> GetTokenBalance(API api, string contractAddress, string address)
         {
-            var balance = await Request<BaseRequest<long>>(api, "account", "tokenbalance", $"contractaddress={contractAddress}&address={address}").ConfigureAwait(false);
+            var balance = await Request<BaseRequest<Balance>>(api, "account", "tokenbalance", $"contractaddress={contractAddress}&address={address}", ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
             return balance;
         }
 
