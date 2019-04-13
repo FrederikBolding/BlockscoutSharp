@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BlockscoutSharp;
 using BlockscoutSharp.Objects;
@@ -16,6 +17,16 @@ namespace BlockscoutSharpTests
             var balance = client.GetBalance(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
             Assert.AreEqual(RequestStatus.OK, balance.Status);
             Assert.IsTrue(balance.Result.eth > 0);
+        }
+
+        [TestMethod]
+        public void GetBalanceMulti()
+        {
+            var balances = client.GetBalanceMulti(API.ETH_Mainnet, new List<string>() { "0xe77162b7d2ceb3625a4993bab557403a7b706f18", "0xab5b57832498a2b541aaa2c448e2e79d872564e0" }).Result;
+            Assert.AreEqual(RequestStatus.OK, balances.Status);
+            Assert.IsTrue(balances.Result.Count > 0);
+            Assert.IsTrue(balances.Result.First().Balance.eth > 0);
+            Assert.AreEqual("0xe77162b7d2ceb3625a4993bab557403a7b706f18", balances.Result.First().Account);
         }
 
         [TestMethod]

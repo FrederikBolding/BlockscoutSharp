@@ -58,6 +58,12 @@ namespace BlockscoutSharp
             return balance;
         }
 
+        public async Task<BaseRequest<List<AddressBalance>>> GetBalanceMulti(API api, List<string> addresses)
+        {
+            var balances = await Request<BaseRequest<List<AddressBalance>>>(api, "account", "balancemulti", $"address={String.Join(",", addresses)}").ConfigureAwait(false);
+            return balances;
+        }
+
         public async Task<BaseRequest<List<Transaction>>> GetTransactions(API api, string address)
         {
             var transactions = await Request<BaseRequest<List<Transaction>>>(api, "account", "txlist", $"address={address}").ConfigureAwait(false);
