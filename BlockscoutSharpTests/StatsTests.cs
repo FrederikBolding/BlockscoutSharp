@@ -1,6 +1,7 @@
 ﻿using BlockscoutSharp;
 using BlockscoutSharp.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace BlockscoutSharpTests
 {
@@ -32,6 +33,7 @@ namespace BlockscoutSharpTests
             var price = client.GetETHPrice(API.ETH_Mainnet).Result;
             Assert.AreEqual(RequestStatus.OK, price.Status);
             Assert.IsTrue(price.Result.ETHUSD > 0);
+            Assert.AreEqual(DateTime.UtcNow.DayOfYear, price.Result.ETHUSDTimestamp.DayOfYear);
         }
     }
 }

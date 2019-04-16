@@ -16,7 +16,7 @@ namespace BlockscoutSharp.Objects
         public string BlockReward { get; set; }
 
         [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long TimeStamp { get; set; }
+        [JsonConverter(typeof(ParseTimestampStringConverter))]
+        public DateTime TimeStamp { get; set; }
     }
 }

@@ -13,15 +13,15 @@ namespace BlockscoutSharp.Objects
         public float ETHBTC { get; set; }
 
         [JsonProperty("ethbtc_timestamp")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long ETHBTCTimestamp { get; set; }
+        [JsonConverter(typeof(ParseTimestampStringConverter))]
+        public DateTime ETHBTCTimestamp { get; set; }
 
         [JsonProperty("ethusd")]
         [JsonConverter(typeof(ParseFloatStringConverter))]
         public float ETHUSD { get; set; }
 
         [JsonProperty("ethusd_timestamp")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long ETHUSDTimestamp { get; set; }
+        [JsonConverter(typeof(ParseTimestampStringConverter))]
+        public DateTime ETHUSDTimestamp { get; set; }
     }
 }

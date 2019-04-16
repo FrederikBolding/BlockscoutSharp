@@ -24,8 +24,8 @@ namespace BlockscoutSharp.Objects
         public string To { get; set; }
 
         [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long TimeStamp { get; set; }
+        [JsonConverter(typeof(ParseTimestampStringConverter))]
+        public DateTime TimeStamp { get; set; }
 
         [JsonProperty("nonce")]
         [JsonConverter(typeof(ParseLongStringConverter))]
