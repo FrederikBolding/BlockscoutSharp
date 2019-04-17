@@ -55,6 +55,7 @@ namespace BlockscoutSharpTests
             var transactions = client.GetTokenTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18", "0xc3761eb917cd790b30dad99f6cc5b4ff93c4f9ea").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
+            Assert.IsTrue(transactions.Result.First().Value.eth > 0);
         }
 
         [TestMethod]
@@ -63,6 +64,7 @@ namespace BlockscoutSharpTests
             var transactions = client.GetTokenTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
+            Assert.IsTrue(transactions.Result.First().Value.eth > 0);
         }
 
         [TestMethod]

@@ -72,6 +72,7 @@ namespace BlockscoutSharp.Objects
         public long TransactionIndex { get; set; }
 
         [JsonProperty("value")]
-        public string Value { get; set; }
+        [JsonConverter(typeof(ParseBalanceStringConverter))]
+        public Balance Value { get; set; }
     }
 }
