@@ -31,7 +31,7 @@ namespace BlockscoutSharp
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     List<JsonConverter> converters = new List<JsonConverter>();
-                    if(converter != null)
+                    if (converter != null)
                     {
                         converters.Add(converter);
                     }
@@ -76,9 +76,15 @@ namespace BlockscoutSharp
             return transactions;
         }
 
-        public async Task<BaseRequest<List<TokenTransfer>>> GetTokenTransactions(API api, string contractAddress, string address)
+        public async Task<BaseRequest<List<TokenTransfer>>> GetTokenTransactions(API api, string address)
         {
-            var balance = await Request<BaseRequest<List<TokenTransfer>>>(api, "account", "tokentx", $"contractaddress={contractAddress}&address={address}").ConfigureAwait(false);
+            var balance = await Request<BaseRequest<List<TokenTransfer>>>(api, "account", "tokentx", $"address={address}").ConfigureAwait(false);
+            return balance;
+        }
+
+        public async Task<BaseRequest<List<TokenTransfer>>> GetTokenTransactions(API api, string address, string contractAddress)
+        {
+            var balance = await Request<BaseRequest<List<TokenTransfer>>>(api, "account", "tokentx", $"address={address}&contractaddress={contractAddress}").ConfigureAwait(false);
             return balance;
         }
 

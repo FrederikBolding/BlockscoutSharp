@@ -50,9 +50,17 @@ namespace BlockscoutSharpTests
         }
 
         [TestMethod]
-        public void GetTokenTransactionsTest()
+        public void GetSpecificTokenTransactionsTest()
         {
-            var transactions = client.GetTokenTransactions(API.ETH_Mainnet, "0xc3761eb917cd790b30dad99f6cc5b4ff93c4f9ea", "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
+            var transactions = client.GetTokenTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18", "0xc3761eb917cd790b30dad99f6cc5b4ff93c4f9ea").Result;
+            Assert.AreEqual(RequestStatus.OK, transactions.Status);
+            Assert.IsTrue(transactions.Result.Count > 0);
+        }
+
+        [TestMethod]
+        public void GetAllTokenTransactionsTest()
+        {
+            var transactions = client.GetTokenTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
         }
