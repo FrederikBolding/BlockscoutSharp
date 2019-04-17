@@ -106,6 +106,11 @@ namespace BlockscoutSharp
             return blocks;
         }
 
+        public async Task<BaseRequest<TokenInfo>> GetTokenInfo(API api, string contractaddress)
+        {
+            var token = await Request<BaseRequest<TokenInfo>>(api, "token", "getToken", $"contractaddress={contractaddress}").ConfigureAwait(false);
+            return token;
+        }
 
         public async Task<BaseRequest<BigInteger>> GetTokenSupply(API api, string contractAddress)
         {
