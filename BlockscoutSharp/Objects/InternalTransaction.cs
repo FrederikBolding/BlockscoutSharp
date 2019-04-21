@@ -33,8 +33,8 @@ namespace BlockscoutSharp.Objects
         public string Input { get; set; }
 
         [JsonProperty("isError")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long IsError { get; set; }
+        [JsonConverter(typeof(ParseBooleanStringConverter))]
+        public bool IsError { get; set; }
 
         [JsonProperty("timeStamp")]
         [JsonConverter(typeof(ParseTimestampStringConverter))]

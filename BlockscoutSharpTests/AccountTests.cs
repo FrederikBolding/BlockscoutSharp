@@ -36,6 +36,7 @@ namespace BlockscoutSharpTests
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
             Assert.IsTrue(transactions.Result.First().Value.eth > 0);
+            Assert.AreEqual(true, transactions.Result.First().TxreceiptStatus);
             Assert.AreEqual(315, transactions.Result.First().TimeStamp.DayOfYear);
         }
 
@@ -45,6 +46,7 @@ namespace BlockscoutSharpTests
             var transactions = client.GetTransactionInternalTransactions(API.ETH_Mainnet, "0xca3595afaafdf3a6773ea34276a3eac026ec36f493287c2fa7153214f4fc0a20").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
+            Assert.IsFalse(transactions.Result[1].IsError);
             Assert.AreEqual(2300, transactions.Result[1].Gas);
             Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
         }
