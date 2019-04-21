@@ -40,14 +40,26 @@ namespace BlockscoutSharpTests
         }
 
         [TestMethod]
-        public void GetInternalTransactionsTest()
+        public void GetTransactionInternalTransactionsTest()
         {
-            var transactions = client.GetInternalTransactions(API.ETH_Mainnet, "0xca3595afaafdf3a6773ea34276a3eac026ec36f493287c2fa7153214f4fc0a20").Result;
+            var transactions = client.GetTransactionInternalTransactions(API.ETH_Mainnet, "0xca3595afaafdf3a6773ea34276a3eac026ec36f493287c2fa7153214f4fc0a20").Result;
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
             Assert.AreEqual(2300, transactions.Result[1].Gas);
             Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
         }
+
+        // API doesn't seem to respond correctly to this at the moment
+        /**[TestMethod]
+        public void GetAddressInternalTransactionsTest()
+        {
+            var transactions = client.GetAddressInternalTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
+            Assert.AreEqual(RequestStatus.OK, transactions.Status);
+            Assert.IsTrue(transactions.Result.Count > 0);
+            Assert.AreEqual(2300, transactions.Result[1].Gas);
+            Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
+        }**/
+
 
         [TestMethod]
         public void GetSpecificTokenTransactionsTest()

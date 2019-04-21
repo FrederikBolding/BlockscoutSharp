@@ -8,57 +8,54 @@ namespace BlockscoutSharp.Objects
 {
     public class Transaction
     {
-        [JsonProperty("value")]
-        [JsonConverter(typeof(ParseBalanceStringConverter))]
-        public Balance Value { get; set; }
-
-        [JsonProperty("txreceipt_status")]
+        [JsonProperty("blockNumber")]
         [JsonConverter(typeof(ParseLongStringConverter))]
-        public long TxreceiptStatus { get; set; }
+        public long BlockNumber { get; set; }
 
-        [JsonProperty("transactionIndex")]
+        [JsonProperty("blockHash")]
+        public string BlockHash { get; set; }
+
+
+        [JsonProperty("cumulativeGasUsed")]
         [JsonConverter(typeof(ParseLongStringConverter))]
-        public long TransactionIndex { get; set; }
+        public long CumulativeGasUsed { get; set; }
 
-        [JsonProperty("to")]
-        public string To { get; set; }
+        [JsonProperty("from")]
+        public string From { get; set; }
+
 
         [JsonProperty("timeStamp")]
         [JsonConverter(typeof(ParseTimestampStringConverter))]
         public DateTime TimeStamp { get; set; }
 
-        [JsonProperty("nonce")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long Nonce { get; set; }
+        [JsonProperty("to")]
+        public string To { get; set; }
 
-        [JsonProperty("isError")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long IsError { get; set; }
-
-        [JsonProperty("input")]
-        public string Input { get; set; }
-
-        [JsonProperty("hash")]
-        public string Hash { get; set; }
-
-        [JsonProperty("gasUsed")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long GasUsed { get; set; }
-
-        [JsonProperty("gasPrice")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long GasPrice { get; set; }
 
         [JsonProperty("gas")]
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long Gas { get; set; }
 
-        [JsonProperty("from")]
-        public string From { get; set; }
+        [JsonProperty("gasPrice")]
+        public string GasPrice { get; set; }
 
-        [JsonProperty("cumulativeGasUsed")]
+        [JsonProperty("gasUsed")]
         [JsonConverter(typeof(ParseLongStringConverter))]
-        public long CumulativeGasUsed { get; set; }
+        public long GasUsed { get; set; }
+
+        [JsonProperty("hash")]
+        public string Hash { get; set; }
+
+        [JsonProperty("transactionIndex")]
+        [JsonConverter(typeof(ParseLongStringConverter))]
+        public long TransactionIndex { get; set; }
+
+        [JsonProperty("nonce")]
+        [JsonConverter(typeof(ParseLongStringConverter))]
+        public long Nonce { get; set; }
+
+        [JsonProperty("input")]
+        public string Input { get; set; }
 
         [JsonProperty("contractAddress")]
         public string ContractAddress { get; set; }
@@ -67,11 +64,8 @@ namespace BlockscoutSharp.Objects
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long Confirmations { get; set; }
 
-        [JsonProperty("blockNumber")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long BlockNumber { get; set; }
-
-        [JsonProperty("blockHash")]
-        public string BlockHash { get; set; }
+        [JsonProperty("value")]
+        [JsonConverter(typeof(ParseBalanceStringConverter))]
+        public Balance Value { get; set; }
     }
 }
