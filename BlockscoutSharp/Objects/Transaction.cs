@@ -6,12 +6,8 @@ using System.Text;
 
 namespace BlockscoutSharp.Objects
 {
-    public class Transaction
+    public class Transaction : BaseTransaction
     {
-        [JsonProperty("blockNumber")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long BlockNumber { get; set; }
-
         [JsonProperty("blockHash")]
         public string BlockHash { get; set; }
 
@@ -19,17 +15,6 @@ namespace BlockscoutSharp.Objects
         [JsonProperty("cumulativeGasUsed")]
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long CumulativeGasUsed { get; set; }
-
-        [JsonProperty("from")]
-        public string From { get; set; }
-
-
-        [JsonProperty("timeStamp")]
-        [JsonConverter(typeof(ParseTimestampStringConverter))]
-        public DateTime TimeStamp { get; set; }
-
-        [JsonProperty("to")]
-        public string To { get; set; }
 
 
         [JsonProperty("gas")]
@@ -39,13 +24,6 @@ namespace BlockscoutSharp.Objects
         [JsonProperty("gasPrice")]
         public string GasPrice { get; set; }
 
-        [JsonProperty("gasUsed")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long GasUsed { get; set; }
-
-        [JsonProperty("hash")]
-        public string Hash { get; set; }
-
         [JsonProperty("transactionIndex")]
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long TransactionIndex { get; set; }
@@ -54,18 +32,7 @@ namespace BlockscoutSharp.Objects
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long Nonce { get; set; }
 
-        [JsonProperty("input")]
-        public string Input { get; set; }
-
         [JsonProperty("contractAddress")]
         public string ContractAddress { get; set; }
-
-        [JsonProperty("confirmations")]
-        [JsonConverter(typeof(ParseLongStringConverter))]
-        public long Confirmations { get; set; }
-
-        [JsonProperty("value")]
-        [JsonConverter(typeof(ParseBalanceStringConverter))]
-        public Balance Value { get; set; }
     }
 }
