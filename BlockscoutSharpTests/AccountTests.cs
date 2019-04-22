@@ -36,7 +36,7 @@ namespace BlockscoutSharpTests
             Assert.AreEqual(RequestStatus.OK, transactions.Status);
             Assert.IsTrue(transactions.Result.Count > 0);
             Assert.IsTrue(transactions.Result.First().Value.eth > 0);
-            Assert.IsTrue(transactions.Result.First().TxreceiptStatus);
+            Assert.IsTrue(transactions.Result.First().ReceiptStatus);
             Assert.AreEqual(2000000000, transactions.Result.First().GasPrice);
             Assert.AreEqual(315, transactions.Result.First().TimeStamp.DayOfYear);
         }

@@ -16,7 +16,7 @@ namespace BlockscoutSharp.Objects
         public string ContractAddress { get; set; }
 
         [JsonProperty("errCode")]
-        public string ErrCode { get; set; }
+        public string ErrorCode { get; set; }
 
         [JsonProperty("from")]
         public string From { get; set; }

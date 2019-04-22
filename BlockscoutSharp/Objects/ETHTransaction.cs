@@ -10,7 +10,7 @@ namespace BlockscoutSharp.Objects
     {
         [JsonProperty("txreceipt_status")]
         [JsonConverter(typeof(ParseBooleanStringConverter))]
-        public bool TxreceiptStatus { get; set; }
+        public bool ReceiptStatus { get; set; }
 
         [JsonProperty("isError")]
         [JsonConverter(typeof(ParseBooleanStringConverter))]

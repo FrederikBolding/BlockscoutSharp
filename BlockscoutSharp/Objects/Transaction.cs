@@ -12,11 +12,9 @@ namespace BlockscoutSharp.Objects
         [JsonProperty("blockHash")]
         public string BlockHash { get; set; }
 
-
         [JsonProperty("cumulativeGasUsed")]
         [JsonConverter(typeof(ParseLongStringConverter))]
         public long CumulativeGasUsed { get; set; }
-
 
         [JsonProperty("gas")]
         [JsonConverter(typeof(ParseLongStringConverter))]
