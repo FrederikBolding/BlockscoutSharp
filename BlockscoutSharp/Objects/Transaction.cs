@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace BlockscoutSharp.Objects
@@ -22,7 +23,8 @@ namespace BlockscoutSharp.Objects
         public long Gas { get; set; }
 
         [JsonProperty("gasPrice")]
-        public string GasPrice { get; set; }
+        [JsonConverter(typeof(ParseBigIntegerStringConverter))]
+        public BigInteger GasPrice { get; set; }
 
         [JsonProperty("transactionIndex")]
         [JsonConverter(typeof(ParseLongStringConverter))]
