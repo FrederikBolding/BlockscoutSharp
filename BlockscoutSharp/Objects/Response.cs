@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace BlockscoutSharp.Objects
 {
-    public class BaseRequest<T>
+    public class Response<T>
     {
         public string Message { get; set; }
         public T Result { get; set; }
