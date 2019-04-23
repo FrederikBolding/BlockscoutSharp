@@ -13,7 +13,12 @@ namespace BlockscoutSharp
 {
     public class BlockscoutClient
     {
-        private string baseUrl = "https://blockscout.com";
+        private string baseUrl;
+
+        public BlockscoutClient(string baseUrl = "https://blockscout.com")
+        {
+            this.baseUrl = baseUrl;
+        }
 
         private async Task<T> Request<T>(API api, string module, string action, string query, JsonConverter converter = null)
         {
@@ -35,14 +40,14 @@ namespace BlockscoutSharp
                     {
                         converters.Add(converter);
                     }
-                    return (T)JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings()
+                    return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings()
                     {
                         Error = HandleDeserializationError,
                         Converters = converters
                     });
                 }
                 else
-                    return default(T);
+                    return default;
             }
         }
 
