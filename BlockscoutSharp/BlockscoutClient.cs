@@ -20,18 +20,15 @@ namespace BlockscoutSharp
             this.baseUrl = baseUrl;
         }
 
-        private async Task<T> Request<T>(API api, string module, string action, string query, JsonConverter converter = null)
+        private async Task<T> Request<T>(Query query, JsonConverter converter = null)
         {
-            var split = api.ToString().Split('_');
-            var currency = split[0].ToLower();
-            var net = split[1].ToLower();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetAsync($"{baseUrl}/{currency}/{net}/api?module={module}&action={action}&{query}").ConfigureAwait(false);
+                var response = await client.GetAsync(query.Build(baseUrl)).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -59,92 +56,92 @@ namespace BlockscoutSharp
 
         public async Task<Response<Balance>> GetBalance(API api, string address)
         {
-            var balance = await Request<Response<Balance>>(api, "account", "balance", $"address={address}", ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
-            return balance;
+            Query query = new Query(api, "account", "balance", new KeyValuePair<string, string>("address", address));
+            return await Request<Response<Balance>>(query, ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
         }
 
         public async Task<Response<List<AddressBalance>>> GetBalanceMulti(API api, List<string> addresses)
         {
-            var balances = await Request<Response<List<AddressBalance>>>(api, "account", "balancemulti", $"address={String.Join(",", addresses)}").ConfigureAwait(false);
-            return balances;
+            Query query = new Query(api, "account", "balance", new KeyValuePair<string, string>("address", String.Join(",", addresses)));
+            return await Request<Response<List<AddressBalance>>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<List<ETHTransaction>>> GetTransactions(API api, string address)
         {
-            var transactions = await Request<Response<List<ETHTransaction>>>(api, "account", "txlist", $"address={address}").ConfigureAwait(false);
-            return transactions;
+            Query query = new Query(api, "account", "txlist", new KeyValuePair<string, string>("address", address));
+            return await Request<Response<List<ETHTransaction>>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<List<InternalTransaction>>> GetAddressInternalTransactions(API api, string address)
         {
-            var transactions = await Request<Response<List<InternalTransaction>>>(api, "account", "txlistinternal", $"address={address}").ConfigureAwait(false);
-            return transactions;
+            Query query = new Query(api, "account", "txlistinternal", new KeyValuePair<string, string>("address", address));
+            return await Request<Response<List<InternalTransaction>>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<List<InternalTransaction>>> GetTransactionInternalTransactions(API api, string txhash)
         {
-            var transactions = await Request<Response<List<InternalTransaction>>>(api, "account", "txlistinternal", $"txhash={txhash}").ConfigureAwait(false);
-            return transactions;
+            Query query = new Query(api, "account", "txlistinternal", new KeyValuePair<string, string>("txhash", txhash));
+            return await Request<Response<List<InternalTransaction>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<List<TokenTransaction>>> GetTokenTransactions(API api, string address)
+        public async Task<Response<List<TokenTransaction>>> GetTokenTransactions(API api, string address, string contractAddress = "")
         {
-            var balance = await Request<Response<List<TokenTransaction>>>(api, "account", "tokentx", $"address={address}").ConfigureAwait(false);
-            return balance;
-        }
+            Query query = new Query(api, "account", "tokentx", new KeyValuePair<string, string>("address", address));
 
-        public async Task<Response<List<TokenTransaction>>> GetTokenTransactions(API api, string address, string contractAddress)
-        {
-            var balance = await Request<Response<List<TokenTransaction>>>(api, "account", "tokentx", $"address={address}&contractaddress={contractAddress}").ConfigureAwait(false);
-            return balance;
+            if (!string.IsNullOrEmpty(contractAddress))
+            {
+                query.AddQueryString("contractAddress", contractAddress);
+            }
+
+            return await Request<Response<List<TokenTransaction>>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<Balance>> GetTokenBalance(API api, string contractAddress, string address)
         {
-            var balance = await Request<Response<Balance>>(api, "account", "tokenbalance", $"contractaddress={contractAddress}&address={address}", ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
-            return balance;
+            Query query = new Query(api, "account", "tokenbalance", new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("contractaddress", contractAddress), new KeyValuePair<string, string>("address", address) });
+            return await Request<Response<Balance>>(query, ParseBalanceStringConverter.Singleton).ConfigureAwait(false);
         }
 
         public async Task<Response<List<Token>>> GetTokenList(API api, string address)
         {
-            var tokens = await Request<Response<List<Token>>>(api, "account", "tokenlist", $"address={address}").ConfigureAwait(false);
-            return tokens;
+            Query query = new Query(api, "account", "tokenlist", new KeyValuePair<string, string>("address", address));
+            return await Request<Response<List<Token>>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<List<Block>>> GetMinedBlocks(API api, string address)
         {
-            var blocks = await Request<Response<List<Block>>>(api, "account", "getminedblocks", $"address={address}").ConfigureAwait(false);
-            return blocks;
+            Query query = new Query(api, "account", "getminedblocks", new KeyValuePair<string, string>("address", address));
+            return await Request<Response<List<Block>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<TokenInfo>> GetTokenInfo(API api, string contractaddress)
+        public async Task<Response<TokenInfo>> GetTokenInfo(API api, string contractAddress)
         {
-            var token = await Request<Response<TokenInfo>>(api, "token", "getToken", $"contractaddress={contractaddress}").ConfigureAwait(false);
-            return token;
+            Query query = new Query(api, "token", "getToken", new KeyValuePair<string, string>("contractaddress", contractAddress));
+            return await Request<Response<TokenInfo>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<BigInteger>> GetTokenSupply(API api, string contractAddress)
         {
-            var supply = await Request<Response<BigInteger>>(api, "stats", "tokensupply", $"contractaddress={contractAddress}").ConfigureAwait(false);
-            return supply;
+            Query query = new Query(api, "stats", "tokensupply", new KeyValuePair<string, string>("contractaddress", contractAddress));
+            return await Request<Response<BigInteger>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<BigInteger>> GetETHSupply(API api)
         {
-            var supply = await Request<Response<BigInteger>>(api, "stats", "ethsupply", "").ConfigureAwait(false);
-            return supply;
+            Query query = new Query(api, "stats", "ethsupply");
+            return await Request<Response<BigInteger>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<ETHPrice>> GetETHPrice(API api)
         {
-            var supply = await Request<Response<ETHPrice>>(api, "stats", "ethprice", "").ConfigureAwait(false);
-            return supply;
+            Query query = new Query(api, "stats", "ethprice");
+            return await Request<Response<ETHPrice>>(query).ConfigureAwait(false);
         }
 
         public async Task<Response<TransactionInfo>> GetTransactionInfo(API api, string txhash)
         {
-            var transaction = await Request<Response<TransactionInfo>>(api, "transaction", "gettxinfo", $"txhash={txhash}").ConfigureAwait(false);
-            return transaction;
+            Query query = new Query(api, "transaction", "gettxinfo", new KeyValuePair<string, string>("txhash", txhash));
+            return await Request<Response<TransactionInfo>>(query).ConfigureAwait(false);
         }
     }
 
