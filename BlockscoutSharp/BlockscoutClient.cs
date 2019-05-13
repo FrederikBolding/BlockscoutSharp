@@ -14,10 +14,12 @@ namespace BlockscoutSharp
     public class BlockscoutClient
     {
         private string baseUrl;
+        private bool ignoreAPI;
 
-        public BlockscoutClient(string baseUrl = "https://blockscout.com")
+        public BlockscoutClient(string baseUrl = "https://blockscout.com", bool ignoreAPI = false)
         {
             this.baseUrl = baseUrl;
+            this.ignoreAPI = ignoreAPI;
         }
 
         private async Task<T> Request<T>(Query query, JsonConverter converter = null)
@@ -28,7 +30,7 @@ namespace BlockscoutSharp
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetAsync(query.Build(baseUrl)).ConfigureAwait(false);
+                var response = await client.GetAsync(query.Build(baseUrl, ignoreAPI)).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

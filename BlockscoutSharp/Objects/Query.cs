@@ -62,12 +62,19 @@ namespace BlockscoutSharp.Objects
             return stringBuilder.ToString();
         }
 
-        public string Build(string baseUrl)
+        public string Build(string baseUrl, bool ignoreAPI)
         {
-            var split = api.ToString().Split('_');
-            var currency = split[0].ToLower();
-            var net = split[1].ToLower();
-            return $"{baseUrl}/{currency}/{net}/api?{GetQueryString()}";
+            if (!ignoreAPI)
+            {
+                var split = api.ToString().Split('_');
+                var currency = split[0].ToLower();
+                var net = split[1].ToLower();
+                return $"{baseUrl}/{currency}/{net}/api?{GetQueryString()}";
+            }
+            else
+            {
+                return $"{baseUrl}/api?{GetQueryString()}";
+            }
         }
     }
 }
