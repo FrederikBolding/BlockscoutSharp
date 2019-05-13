@@ -33,6 +33,22 @@ namespace BlockscoutSharp.Objects
             AddQueryString(requiredQueries);
         }
 
+        public void AddIfAvailable<T>(KeyValuePair<string, Nullable<T>>[] keyValuePairs) where T : struct
+        {
+            foreach(var pair in keyValuePairs)
+            {
+                AddIfAvailable(pair);
+            }
+        }
+
+        public void AddIfAvailable<T>(KeyValuePair<string, Nullable<T>> pair) where T : struct
+        {
+            if (pair.Value.HasValue)
+            {
+                AddQueryString(pair.Key, pair.Value.Value.ToString().ToLowerInvariant());
+            }
+        }
+
         public void AddQueryString(string key, string value)
         {
             AddQueryString(new KeyValuePair<string, string>(key, value));

@@ -68,25 +68,62 @@ namespace BlockscoutSharp
             return await Request<Response<List<AddressBalance>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<List<ETHTransaction>>> GetTransactions(API api, string address)
+        public async Task<Response<List<ETHTransaction>>> GetTransactions(API api, string address, Sorting? sort = Sorting.ASC, int? startBlock = null, int? endBlock = null, int? page = null, int? offset = null, FilterBy? filterBy = null, DateTime? startTimestamp = null, DateTime? endTimestamp = null)
         {
             Query query = new Query(api, "account", "txlist", new KeyValuePair<string, string>("address", address));
+
+            query.AddIfAvailable(new KeyValuePair<string, Sorting?>("sort", sort));
+
+            query.AddIfAvailable(new KeyValuePair<string, int?>[] {
+                new KeyValuePair<string, int?>("startblock", startBlock),
+                new KeyValuePair<string, int?>("endblock", endBlock),
+                new KeyValuePair<string, int?>("page", page),
+                new KeyValuePair<string, int?>("offset", offset),
+            });
+
+            query.AddIfAvailable(new KeyValuePair<string, FilterBy?>("filterby", filterBy));
+
+            query.AddIfAvailable(new KeyValuePair<string, DateTime?>[] {
+                new KeyValuePair<string, DateTime?>("starttimestamp", startTimestamp),
+                new KeyValuePair<string, DateTime?>("endtimestamp", endTimestamp)
+            });
+
             return await Request<Response<List<ETHTransaction>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<List<InternalTransaction>>> GetAddressInternalTransactions(API api, string address)
+        public async Task<Response<List<InternalTransaction>>> GetAddressInternalTransactions(API api, string address, Sorting? sort = Sorting.ASC, int? startBlock = null, int? endBlock = null, int? page = null, int? offset = null)
         {
             Query query = new Query(api, "account", "txlistinternal", new KeyValuePair<string, string>("address", address));
+
+            query.AddIfAvailable(new KeyValuePair<string, Sorting?>("sort", sort));
+
+            query.AddIfAvailable(new KeyValuePair<string, int?>[] {
+                new KeyValuePair<string, int?>("startblock", startBlock),
+                new KeyValuePair<string, int?>("endblock", endBlock),
+                new KeyValuePair<string, int?>("page", page),
+                new KeyValuePair<string, int?>("offset", offset),
+            });
+
             return await Request<Response<List<InternalTransaction>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<List<InternalTransaction>>> GetTransactionInternalTransactions(API api, string txhash)
+        public async Task<Response<List<InternalTransaction>>> GetTransactionInternalTransactions(API api, string txhash, Sorting? sort = Sorting.ASC, int? startBlock = null, int? endBlock = null, int? page = null, int? offset = null)
         {
             Query query = new Query(api, "account", "txlistinternal", new KeyValuePair<string, string>("txhash", txhash));
+
+            query.AddIfAvailable(new KeyValuePair<string, Sorting?>("sort", sort));
+
+            query.AddIfAvailable(new KeyValuePair<string, int?>[] {
+                new KeyValuePair<string, int?>("startblock", startBlock),
+                new KeyValuePair<string, int?>("endblock", endBlock),
+                new KeyValuePair<string, int?>("page", page),
+                new KeyValuePair<string, int?>("offset", offset),
+            });
+
             return await Request<Response<List<InternalTransaction>>>(query).ConfigureAwait(false);
         }
 
-        public async Task<Response<List<TokenTransaction>>> GetTokenTransactions(API api, string address, string contractAddress = "")
+        public async Task<Response<List<TokenTransaction>>> GetTokenTransactions(API api, string address, string contractAddress = "", Sorting? sort = Sorting.ASC, int? startBlock = null, int? endBlock = null, int? page = null, int? offset = null)
         {
             Query query = new Query(api, "account", "tokentx", new KeyValuePair<string, string>("address", address));
 
@@ -94,6 +131,15 @@ namespace BlockscoutSharp
             {
                 query.AddQueryString("contractAddress", contractAddress);
             }
+
+            query.AddIfAvailable(new KeyValuePair<string, Sorting?>("sort", sort));
+
+            query.AddIfAvailable(new KeyValuePair<string, int?>[] {
+                new KeyValuePair<string, int?>("startblock", startBlock),
+                new KeyValuePair<string, int?>("endblock", endBlock),
+                new KeyValuePair<string, int?>("page", page),
+                new KeyValuePair<string, int?>("offset", offset),
+            });
 
             return await Request<Response<List<TokenTransaction>>>(query).ConfigureAwait(false);
         }
@@ -150,5 +196,15 @@ namespace BlockscoutSharp
     public enum API
     {
         ETH_Mainnet, ETH_Ropsten, ETH_Goerli, ETH_Rinkeby, ETH_Kovan, ETC_Mainnet, POA_Core, POA_Sokol, POA_Dai
+    }
+
+    public enum Sorting
+    {
+        ASC, DESC
+    }
+
+    public enum FilterBy
+    {
+        From, To
     }
 }
