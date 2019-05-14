@@ -14,7 +14,7 @@ namespace BlockscoutSharpTests
         [TestMethod]
         public void GetBalanceTest()
         {
-            var balance = client.GetBalance(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
+            var balance = client.GetBalance(API.ETH_Mainnet, "0x67c596c09ECA47Fc8005BF94159DEbEa20D89eA9").Result;
             Assert.AreEqual(RequestStatus.OK, balance.Status);
             Assert.IsTrue(balance.Result.eth > 0);
         }
@@ -25,7 +25,7 @@ namespace BlockscoutSharpTests
             var balances = client.GetBalanceMulti(API.ETH_Mainnet, new List<string>() { "0xe77162b7d2ceb3625a4993bab557403a7b706f18", "0xab5b57832498a2b541aaa2c448e2e79d872564e0" }).Result;
             Assert.AreEqual(RequestStatus.OK, balances.Status);
             Assert.IsTrue(balances.Result.Count > 0);
-            Assert.IsTrue(balances.Result.First().Balance.eth > 0);
+            Assert.IsTrue(balances.Result.Any(b => b.Balance.eth > 0));
             Assert.AreEqual("0xe77162b7d2ceb3625a4993bab557403a7b706f18", balances.Result.First().Account);
         }
 
@@ -112,7 +112,7 @@ namespace BlockscoutSharpTests
             Assert.AreEqual(RequestStatus.OK, tokens.Status);
             Assert.IsTrue(tokens.Result.Count > 0);
             Assert.IsTrue(tokens.Result.Any(t => t.ContractAddress.Equals("0xc3761eb917cd790b30dad99f6cc5b4ff93c4f9ea")));
-            Assert.IsTrue(tokens.Result.First().Balance.eth > 0);
+            Assert.IsTrue(tokens.Result.Last().Balance.eth > 0);
         }
 
         // API doesn't seem to respond correctly to this at the moment
