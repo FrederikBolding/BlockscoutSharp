@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/FrederikBolding/BlockscoutSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Wrapper for Blockscout's Web API</description>
-    <releaseNotes>Expanded API support</releaseNotes>
+    <releaseNotes>Bug fixes</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <license type="expression">MIT</license>
     <tags>blockscout eth api blockchain explorer</tags>
