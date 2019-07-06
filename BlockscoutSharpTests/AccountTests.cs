@@ -67,8 +67,7 @@ namespace BlockscoutSharpTests
             Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
         }
 
-        // API doesn't seem to respond correctly to this at the moment
-        /**[TestMethod]
+        [TestMethod]
         public void GetAddressInternalTransactionsTest()
         {
             var transactions = client.GetAddressInternalTransactions(API.ETH_Mainnet, "0xe77162b7d2ceb3625a4993bab557403a7b706f18").Result;
@@ -76,7 +75,7 @@ namespace BlockscoutSharpTests
             Assert.IsTrue(transactions.Result.Count > 0);
             Assert.AreEqual(2300, transactions.Result[1].Gas);
             Assert.IsTrue(transactions.Result.Last().Value.eth > 0);
-        }**/
+        }
 
 
         [TestMethod]
@@ -112,7 +111,7 @@ namespace BlockscoutSharpTests
             Assert.AreEqual(RequestStatus.OK, tokens.Status);
             Assert.IsTrue(tokens.Result.Count > 0);
             Assert.IsTrue(tokens.Result.Any(t => t.ContractAddress.Equals("0xc3761eb917cd790b30dad99f6cc5b4ff93c4f9ea")));
-            Assert.IsTrue(tokens.Result.Last().Balance.eth > 0);
+            Assert.IsTrue(tokens.Result.Any(t => t.Balance.eth > 0));
         }
 
         // API doesn't seem to respond correctly to this at the moment

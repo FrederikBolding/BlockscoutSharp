@@ -13,8 +13,8 @@ namespace BlockscoutSharp.Converters
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            BigInteger i;
-            if (BigInteger.TryParse(value, out i))
+            BigInteger i = 0;
+            if (string.IsNullOrEmpty(value) || BigInteger.TryParse(value, out i))
             {
                 return new Balance(i);
             }
